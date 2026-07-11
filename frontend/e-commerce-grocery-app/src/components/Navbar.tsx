@@ -1,0 +1,49 @@
+import React from "react";
+import { Bell, Menu } from "lucide-react";
+
+interface NavbarProps {
+  onMenuClick: () => void; // 🚀 Toggle visibility link bridge
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
+  const userName = localStorage.getItem("userName") || "Customer";
+
+  return (
+    <header className="h-16 border-b border-slate-900/80 bg-slate-950/40 backdrop-blur-xl flex items-center justify-between px-6 z-20 shrink-0 sticky top-0">
+      
+      {/* Hamburger Menu Trigger - Visible on mobile/tablets only */}
+      <button 
+        onClick={onMenuClick}
+        className="md:hidden p-2 -ml-2 text-slate-400 hover:text-white hover:bg-slate-900/50 rounded-xl transition-all cursor-pointer"
+      >
+        <Menu size={20} />
+      </button>
+
+      {/* Greetings block */}
+      <div className="hidden md:block">
+        <h1 className="text-xs font-semibold text-slate-400 tracking-wide uppercase">
+          Welcome back, <span className="text-violet-400 font-bold normal-case text-sm tracking-normal">{userName}</span>
+        </h1>
+      </div>
+
+      {/* Control Actions right alignments */}
+      <div className="flex items-center gap-4 ml-auto md:ml-0">
+        <button className="p-2 text-slate-400 hover:text-violet-400 rounded-xl hover:bg-slate-900/50 transition-all relative cursor-pointer">
+          <Bell size={18} />
+          <span className="absolute top-2.5 right-2.5 w-1.5 h-1.5 bg-pink-500 rounded-full shadow-lg shadow-pink-500/50" />
+        </button>
+        
+        <div className="h-6 w-px bg-slate-800" />
+
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center text-white font-black text-xs shadow-lg shadow-violet-500/20 uppercase">
+            {userName.charAt(0)}
+          </div>
+          <span className="text-xs font-semibold text-slate-300 hidden sm:block">{userName}</span>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;
