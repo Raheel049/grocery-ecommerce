@@ -17,11 +17,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
   const logoutHandler = (): void => {
 
-    try {
-        
-    } catch (error) {
-        consol
-    }
+    
     localStorage.clear();
     window.location.href = "/login";
   };
