@@ -14,7 +14,7 @@ const port = process.env.APP_PORT || 3000;
 
 // 🚀 1. CORS Configuration (Strictly Added Credentials Clearance)
 app.use(cors({
-    origin: process.env.FE_BASE_URL, // 👈 Aapke frontend ka exact port URL (Check kar lein agar 3000 hai ya 5173)
+    origin: process.env.FE_BASE_URL || "https://grocery-ecommerce-frontend-9sd2cdptd-raheel049s-projects.vercel.app/", // 👈 Aapke frontend ka exact port URL (Check kar lein agar 3000 hai ya 5173)
     credentials: true // 👈 Yeh browser ko cookie transmission explicitly allow karta hai
 }));
 
