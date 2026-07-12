@@ -121,6 +121,8 @@ export const loginHandler = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    const isProduction = process.env.NODE_ENV === "production";
+
     if (!email || !password) {
       return res.status(400).json({
         message: "Required fields are missing",
@@ -164,15 +166,15 @@ export const loginHandler = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       maxAge: 15 * 60 * 1000,
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
@@ -197,7 +199,7 @@ export const loginHandler = async (req, res) => {
 export const refreshTokenHandler = async (req, res) => {
   try {
     const token = req.cookies.refreshToken;
-
+    console.log(token)
     if (!token) {
       return res.status(401).json({
         message: "Refresh token missing",
@@ -234,7 +236,7 @@ export const refreshTokenHandler = async (req, res) => {
     const session = await sessionModel.findOneAndUpdate(
       { refreshToken: token },
       { lastActive: new Date() },
-      { new: true } // Return updated document framework parameter
+      {  returnDocument: "after", } // Return updated document framework parameter
     );
 
     if (!session) {

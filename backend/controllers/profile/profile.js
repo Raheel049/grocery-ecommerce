@@ -3,8 +3,9 @@ import userModel from "../../models/auth/auth.js"
 export const getProfile = async (req, res) => {
     try {
         const userId = req.user.id
+        console.log(userId);
+
         const user = await userModel.findOne({_id: userId});
-        
         res.status(200).json({
             message: "Profile found",
             data: {

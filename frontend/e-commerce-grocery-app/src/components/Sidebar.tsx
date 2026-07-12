@@ -38,7 +38,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         {/* Branding Title Bar */}
         <div className="h-16 px-6 border-b border-slate-900 flex items-center justify-between shrink-0">
           <span className="text-base font-black bg-gradient-to-r from-violet-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent tracking-widest">
-            REEL FORGE
+            Ecommerce Grocery
           </span>
           {/* Close Button on Mobile view */}
           <button onClick={onClose} className="md:hidden text-slate-500 hover:text-white transition-colors cursor-pointer">

@@ -7,9 +7,10 @@ import passport from './config/passport.js';
 import sessionRoute from './routes/sessionRoute.js';
 import profileRoute from './routes/profileRoute.js';
 import cors from 'cors';
+import productRoute from './routes/productRoute.js';
 
 const app = express();
-const port = process.env.APP_PORT || 5000;
+const port = process.env.APP_PORT || 3000;
 
 // 🚀 1. CORS Configuration (Strictly Added Credentials Clearance)
 app.use(cors({
@@ -30,6 +31,7 @@ dbConnect();
 app.use('/api/auth', authRoute);
 app.use('/api/session', sessionRoute);
 app.use('/api/profile', profileRoute);
+app.use('/api/product',productRoute);
 
 // Base Route
 app.get('/', (req, res) => {

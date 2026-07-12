@@ -12,6 +12,7 @@ import UserDashboard from '../src/Pages/UserDashboard/UserDashboard'
 import AuthRoute from '../src/routes/AuthRoute'
 import PrivateRoute from '../src/routes/PrivateRoute'
 import UserOverview from '../src/Pages/UserDashboard/UserOverview'
+import UserProfile from '../src/Pages/UserDashboard/UserProfile'
 
 const App = () => {
   return(
@@ -34,7 +35,7 @@ const App = () => {
             <Route index element={<UserOverview />} /> 
             <Route path="Overview" element={<UserOverview />} />
             {/* <Route path="orders" element={<OrdersPlaceholder />} /> */}
-            {/* <Route path="profile" element={<ProfilePlaceholder />} /> */}
+            <Route path="profile" element={<UserProfile />} />
           </Route>
         </Route>
       </Routes>

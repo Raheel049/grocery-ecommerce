@@ -1,45 +1,66 @@
-import axios from "axios";
-import type { AxiosInstance, AxiosResponse } from "axios";
+import axios, {
+  AxiosError,
+} from "axios";
+  import type { InternalAxiosRequestConfig } from 'axios'
 
-const API_BASE_URL: string = (import.meta.env.VITE_API_URL as string) || "http://localhost:5000";
-
-const privateAPI: AxiosInstance = axios.create({
-  baseURL: API_BASE_URL,
+const axiosInstance = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
 });
 
-privateAPI.interceptors.response.use(
-  (response: AxiosResponse) => response,
-  async (error) => {
-    const originalRequest = error.config;
+// ==========================
+// Request Interceptor
+// ==========================
 
-    // 🚀 FIX: In endpoints par refresh token trigger nahi hona chahiye
-    const bypassEndpoints = ["/api/auth/login", "/api/auth/sign-up"];
-    
-    // Check karein agar request URL in bypass endpoints me se koi ek hai
-    const isBypassRoute = bypassEndpoints.some(url => originalRequest.url?.includes(url));
-
-    // Agar 401 error hai, pehle retry nahi hua, AUR yeh login/signup ki request NAHI hai
-    if (error.response?.status === 401 && !originalRequest._retry && !isBypassRoute) {
-      originalRequest._retry = true;
-
-      try {
-        // Silent refresh attempt
-        await axios.post(`${API_BASE_URL}/api/auth/refresh-token`, {}, { withCredentials: true });
-        
-        // Main request retry karein
-        return privateAPI(originalRequest);
-      } catch (refreshError) {
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("userRole");
-        window.location.href = "/login";
-        return Promise.reject(refreshError);
-      }
-    }
-
-    // Agar login/signup par 401 aaya hai, toh direct error response components tak jaane dein (bina refresh chalaye)
+axiosInstance.interceptors.request.use(
+  (config: InternalAxiosRequestConfig) => {
+    return config;
+  },
+  (error: AxiosError) => {
     return Promise.reject(error);
   }
 );
 
-export default privateAPI;
+// ==========================
+// Response Interceptor
+// ==========================
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+
+  async (error: AxiosError) => {
+    const originalRequest = error.config as InternalAxiosRequestConfig & {
+      _retry?: boolean;
+    };
+
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.url?.includes("/api/auth/login") &&
+      !originalRequest.url?.includes("/api/auth/refresh-token")
+    ) {
+      originalRequest._retry = true;
+
+      try {
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/api/auth/refresh-token`,
+          {},
+          {
+            withCredentials: true,
+          }
+        );
+
+        return axiosInstance(originalRequest);
+      } catch (refreshError) {
+        // window.location.href = "/login";
+        // localStorage.clear()
+
+        return console.log(refreshError);
+      }
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+export default axiosInstance;

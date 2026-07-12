@@ -46,7 +46,7 @@ const Login: React.FC = () => {
       if (role === "Admin") {
         navigate("/admin/dashboard"); // Protected Admin View
       } else {
-        navigate("/UserDashboard/UserDashboard"); // Main Public Grocery Catalogs
+        navigate("/UserDashboard/Overview"); // Main Public Grocery Catalogs
       }
       
     } catch (error: unknown) {
