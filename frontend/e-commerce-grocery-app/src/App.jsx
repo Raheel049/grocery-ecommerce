@@ -13,6 +13,8 @@ import AuthRoute from '../src/routes/AuthRoute'
 import PrivateRoute from '../src/routes/PrivateRoute'
 import UserOverview from '../src/Pages/UserDashboard/UserOverview'
 import UserProfile from '../src/Pages/UserDashboard/UserProfile'
+import AdminDashboard from '../src/Pages/Admin/adminDashboard'
+import AdminProducts from '../src/Pages/Admin/adminProduct'
 
 const App = () => {
   return(
@@ -36,6 +38,13 @@ const App = () => {
             <Route path="Overview" element={<UserOverview />} />
             {/* <Route path="orders" element={<OrdersPlaceholder />} /> */}
             <Route path="profile" element={<UserProfile />} />
+          </Route>
+
+          <Route path="/adminDashboard" element={<AdminDashboard />}>
+            <Route index element={<AdminProducts />} /> {/* Default load */}
+            {/* <Route path="Overview" element={<AdminOverviewPlaceholder />} />
+            <Route path="adminProducts" element={<AdminProducts />} />
+            <Route path="Users" element={<AdminUsersPlaceholder />} /> */}
           </Route>
         </Route>
       </Routes>

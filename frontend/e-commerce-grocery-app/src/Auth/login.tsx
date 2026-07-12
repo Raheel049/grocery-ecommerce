@@ -36,7 +36,8 @@ const Login: React.FC = () => {
       // Kuch cases ya older configurations ke liye role ko browser state storage me rakhein
       localStorage.setItem("userRole", res.data.role);
       localStorage.setItem("isLoggedIn", "true");
-
+      console.log(res)
+      
       // Safe invocation of toast.success
       toast.success(res.data.message || "Welcome back!");
 
@@ -44,7 +45,7 @@ const Login: React.FC = () => {
 
       // Role-Based Redirection matched exactly with criteria
       if (role === "Admin") {
-        navigate("/admin/dashboard"); // Protected Admin View
+        navigate("/adminDashboard"); // Protected Admin View
       } else {
         navigate("/UserDashboard/Overview"); // Main Public Grocery Catalogs
       }
