@@ -1,0 +1,8 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import React from "react";
+import { Bell, Menu, ShieldCheck } from "lucide-react";
+const AdminNavbar = ({ onMenuClick }) => {
+    const adminName = localStorage.getItem("userName") || "System Admin";
+    return (_jsxs("header", { className: "h-16 border-b border-rose-950/30 bg-[#0d090b]/40 backdrop-blur-xl flex items-center justify-between px-6 z-20 shrink-0 sticky top-0", children: [_jsx("button", { onClick: onMenuClick, className: "md:hidden p-2 -ml-2 text-slate-400 hover:text-white hover:bg-slate-900/50 rounded-xl transition-all cursor-pointer", children: _jsx(Menu, { size: 20 }) }), _jsx("div", { className: "hidden md:block", children: _jsxs("h1", { className: "text-xs font-semibold text-slate-400 tracking-wide uppercase flex items-center gap-2", children: ["Root Active: ", _jsx("span", { className: "text-rose-400 font-bold normal-case text-sm tracking-normal", children: adminName })] }) }), _jsxs("div", { className: "flex items-center gap-4 ml-auto md:ml-0", children: [_jsxs("div", { className: "flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-500/10 border border-rose-500/20 text-[10px] font-black tracking-widest text-rose-400 uppercase", children: [_jsx(ShieldCheck, { size: 12 }), " SECURE SHELL"] }), _jsx("div", { className: "h-6 w-px bg-slate-800" }), _jsx("div", { className: "flex items-center gap-2", children: _jsx("div", { className: "w-8 h-8 rounded-xl bg-gradient-to-br from-rose-500 to-orange-500 flex items-center justify-center text-white font-black text-xs shadow-lg shadow-rose-500/20 uppercase", children: adminName.charAt(0) }) })] })] }));
+};
+export default AdminNavbar;
