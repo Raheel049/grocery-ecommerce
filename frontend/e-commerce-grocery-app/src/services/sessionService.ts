@@ -9,14 +9,14 @@ export const getSessions = async () => {
 
 export const logoutDevice = async (id:string) => {
 
-    const response = await axiosInstance.delete(`/api/session/${id}`);
+    const response = await axiosInstance.delete(`/api/session/logout-device/${id}`);
 
     return response.data;
 };
 
 export const logoutAllDevices = async () => {
 
-    const response = await axiosInstance.delete("/api/session/logout-all");
+    const response = await axiosInstance.delete("/api/session/logout-all-device");
 
     return response.data;
 };
