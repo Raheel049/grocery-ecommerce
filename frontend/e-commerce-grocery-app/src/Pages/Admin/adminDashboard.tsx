@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import AdminSidebar from "../../components/adminComponents/adminSidebar.js";
-import AdminNavbar from "../../components/adminComponents/adminNavbar.js";
+import AdminSidebar from "../../components/AdminComponents/AdminSidebar.js";
+import AdminNavbar from "../../components/AdminComponents/AdminNavbar.js";
 
 const AdminDashboard: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);

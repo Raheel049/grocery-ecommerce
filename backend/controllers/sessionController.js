@@ -4,10 +4,11 @@ import sessionModel from "../models/auth/session.js";
 export const getAllSession = async (req, res) => {
   try {
     const id = req.user.id;
+    const currentToken = req.cookies.refreshToken
 
-    const session = await sessionModel.find({ user: id });
+    const sessions = await sessionModel.find({ user: id });
 
-    if (!session) {
+    if (!sessions) {
       return res.status(400).json({
         message: "Session not found",
         status: false,
@@ -15,10 +16,22 @@ export const getAllSession = async (req, res) => {
       });
     }
 
+    const data = sessions.map((session) => ({
+      _id: session._id,
+      browser: session.browser,
+      os: session.os,
+      device: session.device,
+      ipAddress: session.ipAddress,
+      lastActive: session.lastActive,
+
+      // ⭐ Current device
+      current: session.refreshToken === currentToken,
+    }))
+
     res.status(200).json({
       message: "Data found success",
       status: true,
-      data: session,
+      data: data,
     });
   } catch (error) {
     return res.status(500).json({

@@ -19,10 +19,13 @@ export const createSession = async (user, refreshToken, req) => {
         ipAddress: deviceInfo.ipAddress,
 
         userAgent: deviceInfo.userAgent,
+        current: false,
+
 
         lastActive: new Date(),
 
         expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+
     });
 
 };

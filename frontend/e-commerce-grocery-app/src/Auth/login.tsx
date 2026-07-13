@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import Cookies from "js-cookie"; // 🚀 Cookies package import kiya
+
 
 // Khizex Strict API Response Contract mapping
 interface LoginResponse {
@@ -45,9 +45,9 @@ const Login: React.FC = () => {
 
       // Role-Based Redirection matched exactly with criteria
       if (role === "Admin") {
-        navigate("/adminDashboard"); // Protected Admin View
+        navigate("/AdminDashboard"); // Protected Admin View
       } else {
-        navigate("/UserDashboard/Overview"); // Main Public Grocery Catalogs
+        navigate("/UserDashboard/UserOverview"); // Main Public Grocery Catalogs
       }
       
     } catch (error: unknown) {

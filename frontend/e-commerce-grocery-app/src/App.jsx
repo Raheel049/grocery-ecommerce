@@ -13,8 +13,10 @@ import AuthRoute from '../src/routes/AuthRoute'
 import PrivateRoute from '../src/routes/PrivateRoute'
 import UserOverview from '../src/Pages/UserDashboard/UserOverview'
 import UserProfile from '../src/Pages/UserDashboard/UserProfile'
-import AdminDashboard from '../src/Pages/Admin/adminDashboard'
-import AdminProducts from '../src/Pages/Admin/adminProduct'
+import AdminDashboard from './Pages/Admin/AdminDashboard'
+import AdminProducts from './Pages/Admin/AdminProduct'
+import UserSettings from '../src/Pages/UserDashboard/UserSettings'
+import DeviceManagement from '../src/Pages/Settings/DeviceManagement'
 
 const App = () => {
   return(
@@ -35,16 +37,23 @@ const App = () => {
           <Route path="/UserDashboard" element={<UserDashboard />}>
             {/* Jab user /UserDashboard par aaye toh automatic Overview khule */}
             <Route index element={<UserOverview />} /> 
-            <Route path="Overview" element={<UserOverview />} />
+            <Route path="/UserDashboard/UserOverview" element={<UserOverview />} />
             {/* <Route path="orders" element={<OrdersPlaceholder />} /> */}
-            <Route path="profile" element={<UserProfile />} />
+            <Route path="/UserDashboard/UserProfile" element={<UserProfile />} />
+            <Route path="/UserDashboard/UserSettings" element={<UserSettings />} />
+
           </Route>
 
-          <Route path="/adminDashboard" element={<AdminDashboard />}>
+          <Route path="/AdminDashboard" element={<AdminDashboard />}>
             <Route index element={<AdminProducts />} /> {/* Default load */}
             {/* <Route path="Overview" element={<AdminOverviewPlaceholder />} />
             <Route path="adminProducts" element={<AdminProducts />} />
             <Route path="Users" element={<AdminUsersPlaceholder />} /> */}
+          </Route>
+
+          <Route>
+            <Route index element={<UserSettings />} />
+            <Route path="/DeviceManagement" element={<DeviceManagement />} />
           </Route>
         </Route>
       </Routes>

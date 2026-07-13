@@ -41,13 +41,14 @@ export default function HomePage(): React.JSX.Element {
               Login
             </MotionLink>
             
-            <motion.button 
+            <MotionLink 
               whileHover={{ scale: 1.05, boxShadow: "0 10px 15px -3px rgba(16, 185, 129, 0.2)" }}
               whileTap={{ scale: 0.95 }}
               className="px-5 py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 transition-all"
+              to='/signUp'
             >
               Sign Up
-            </motion.button>
+            </MotionLink>
           </div>
         </div>
       </header>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../../components/Sidebar.js";
-import Navbar from "../../components/Navbar.js";
+import Sidebar from "../../components/UserComponent/Sidebar.js";
+import Navbar from "../../components/UserComponent/Navbar.js";
 
 const UserDashboard: React.FC = () => {
   // 🚀 Mobile toggle open/close state logic
@@ -24,7 +24,7 @@ const UserDashboard: React.FC = () => {
         <Navbar onMenuClick={() => setSidebarOpen(true)} />
 
         {/* 3. Independent Content Scroll Body (100vh Fix) */}
-        <main className="flex-1 p-6 md:p-8 overflow-y-auto custom-scrollbar">
+        <main className="flex-1 p-6 md:p-8 overflow-y-auto overflow-x-hidden custom-scrollbar">
           <div className="max-w-7xl mx-auto w-full">
             <Outlet />
           </div>

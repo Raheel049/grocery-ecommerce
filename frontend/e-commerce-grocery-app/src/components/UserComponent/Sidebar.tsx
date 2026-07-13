@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, ShoppingBag, LogOut, X, User } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, LogOut, X, User, Settings } from "lucide-react";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -10,9 +10,11 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
   const menuItems = [
-    { name: "Overview", path: "/UserDashboard/Overview", icon: <LayoutDashboard size={18} /> },
+    { name: "Overview", path: "/UserDashboard/UserOverview", icon: <LayoutDashboard size={18} /> },
     { name: "My Orders", path: "/UserDashboard/orders", icon: <ShoppingBag size={18} /> },
-    { name: "Account Profile", path: "/UserDashboard/profile", icon: <User size={18} /> },
+    { name: "Account Profile", path: "/UserDashboard/UserProfile", icon: <User size={18} /> },
+    { name: "Settings", path: "/UserDashboard/UserSettings", icon: <Settings size={18} /> },
+
   ];
 
   const logoutHandler = (): void => {

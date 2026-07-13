@@ -38,6 +38,11 @@ const sessionSchema = new mongoose.Schema(
       default: "",
     },
 
+    current: {
+      type: Boolean,
+      default: false
+    },
+
     lastActive: {
       type: Date,
       default: Date.now,
