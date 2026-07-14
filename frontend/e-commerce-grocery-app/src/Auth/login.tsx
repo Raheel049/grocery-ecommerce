@@ -8,8 +8,10 @@ import { toast } from "react-hot-toast";
 interface LoginResponse {
   accessToken: string;  // Explicitly expected properties
   refreshToken: string;
-  role: "Admin" | "Customer";
   message?: string;
+  data: {
+    role : "User" | "Admin",
+  }
 }
 
 const Login: React.FC = () => {
@@ -34,14 +36,15 @@ const Login: React.FC = () => {
       
       
       // Kuch cases ya older configurations ke liye role ko browser state storage me rakhein
-      localStorage.setItem("userRole", res.data.role);
+      localStorage.setItem("userRole", res.data.data.role);
       localStorage.setItem("isLoggedIn", "true");
-      console.log(res)
+      console.log("responseLogin",res.data.data.role);
       
       // Safe invocation of toast.success
       toast.success(res.data.message || "Welcome back!");
 
-      const role = res.data.role;
+      const role = res.data.data.role;
+
 
       // Role-Based Redirection matched exactly with criteria
       if (role === "Admin") {

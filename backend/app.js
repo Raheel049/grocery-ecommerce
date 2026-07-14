@@ -8,13 +8,14 @@ import sessionRoute from './routes/sessionRoute.js';
 import profileRoute from './routes/profileRoute.js';
 import cors from 'cors';
 import productRoute from './routes/productRoute.js';
+import cartRoute from './routes/cartRoute.js';
 
 const app = express();
 const port = process.env.APP_PORT || 3000;
 
 // 🚀 1. CORS Configuration (Strictly Added Credentials Clearance)
 app.use(cors({
-    origin: "https://grocery-ecommerce-frontend.vercel.app", // 👈 Aapke frontend ka exact port URL (Check kar lein agar 3000 hai ya 5173)
+    origin: process.env.FE_BASE_URL || "http://localhost:5173", // 👈 Aapke frontend ka exact port URL (Check kar lein agar 3000 hai ya 5173)
     credentials: true // 👈 Yeh browser ko cookie transmission explicitly allow karta hai
 }));
 
@@ -32,6 +33,7 @@ app.use('/api/auth', authRoute);
 app.use('/api/session', sessionRoute);
 app.use('/api/profile', profileRoute);
 app.use('/api/product',productRoute);
+app.use('/api/cart/', cartRoute)
 
 // Base Route
 app.get('/', (req, res) => {

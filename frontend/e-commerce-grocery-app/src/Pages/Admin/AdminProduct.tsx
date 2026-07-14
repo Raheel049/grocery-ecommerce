@@ -29,7 +29,7 @@ const AdminProducts: React.FC = () => {
   // 🚀 1. Fetch live active products from DB
   const fetchProducts = async () => {
     try {
-      const response = await privateAPI.get("/api/products/list");
+      const response = await privateAPI.get("/api/product/list");
       setProducts(response.data.data || []);
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Failed to load product list.");
@@ -57,7 +57,7 @@ const AdminProducts: React.FC = () => {
         imageUrl
       };
 
-      const response = await privateAPI.post("/api/products/add", payload);
+      const response = await privateAPI.post("/api/product/add", payload);
       toast.success(response.data.message || "Product injected into database!");
       
       // Reset Form fields
