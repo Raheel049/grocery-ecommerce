@@ -59,3 +59,6 @@ As we create three api on backend For session managemnt so there we implement on
 so we create a `Component for device card` in components folder pass props and `DeviceManagement` file in Settings Folder where we pass user devices through props
 create a `sesssionService` in services folder then call all three apis in `sessionService`  `getSession` `LogOutDevice` `LogoutAllDevice` 
  
+## I have to update get-all-session
+
+To add `current key` in session Schema when I am Implemmenting the session management I have to check the user `Current device` for delete one device so i have get `cookie token` in `get-all-session` controller and check the session.refreshToken and cookie token if same then `current` will be change   `true` and then forntend we get true so it is current device   
