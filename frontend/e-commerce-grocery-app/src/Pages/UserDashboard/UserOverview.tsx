@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { ShoppingBag, Truck, CheckCircle2, ShoppingCart, Tag } from "lucide-react";
-import axios from "axios";
 import { toast } from "react-hot-toast";
 import axiosInstance from "../../api/axiosInstance.js";
+import { addToCart } from "../../services/cartService.js";
+import { useNavigate } from "react-router-dom";
 
 // 1. Product interface mapping as per your MongoDB response contract
 interface Product {
@@ -18,9 +19,12 @@ interface Product {
 }
 
 const UserOverview: React.FC = () => {
+
+  const navigate = useNavigate()
   const API: string = (import.meta.env.VITE_API_URL as string) || "";
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [addingProduct, setAddingProduct] = useState("");
 
   // 2. Fetch products from database
   useEffect(() => {
@@ -59,9 +63,22 @@ const UserOverview: React.FC = () => {
     { title: "Active Categories", value: "01", icon: <CheckCircle2 className="text-sky-400" size={22} />, bg: "bg-sky-500/10 border-sky-500/20" },
   ];
 
-  const handleAddToCart = (productId: string) => {
-    toast.success("Added to cart! (Cart logic upcoming)");
-    // Yahan aap apna cart handler link kar sakte hain
+  const handleAddToCart = async (product: Product) => {
+    try {
+      setAddingProduct(product._id);
+  
+      const response = await addToCart(product._id, 1);
+  
+      toast.success(response.message);
+  
+      navigate("/UserDashboard/Cart");
+    } catch (error: any) {
+      toast.error(
+        error.response?.data?.message || "Failed to add product"
+      );
+    } finally {
+      setAddingProduct("");
+    }
   };
 
   return (
@@ -153,12 +170,15 @@ const UserOverview: React.FC = () => {
 
                   {/* Add To Cart Action Trigger */}
                   <button
-                    onClick={() => handleAddToCart(product._id)}
-                    disabled={product.stock === 0}
+                    onClick={() => handleAddToCart(product)}
+                    disabled={
+                      product.stock <= 0 ||
+                      addingProduct === product._id
+                    }
                     className="w-full py-2.5 px-4 rounded-xl text-xs font-semibold text-slate-950 bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-95 active:scale-[0.98] disabled:from-slate-800 disabled:to-slate-900 disabled:text-slate-500 disabled:pointer-events-none transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-emerald-500/5"
                   >
                     <ShoppingCart size={14} />
-                    {product.stock > 0 ? "Add to Cart" : "Sold Out"}
+                    {product.stock > 0 ? "Add To Cart" : "Out Of Stock"}
                   </button>
                 </div>
               </div>

@@ -17,6 +17,7 @@ import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import AdminProducts from "./Pages/Admin/AdminProduct";
 import UserSettings from "../src/Pages/UserDashboard/UserSettings";
 import DeviceManagement from "../src/Pages/Settings/DeviceManagement";
+import Cart from '../src/Pages/Cart/Cart'
 
 // ... baqi imports same rahenge
 
@@ -51,6 +52,8 @@ const App = () => {
             
             {/* 2. Device Management ka direct path (No complex nesting) */}
             <Route path="DeviceManagement" element={<DeviceManagement />} />
+
+            <Route path="Cart" element={<Cart />} />
           </Route>
 
           {/* ADMIN DASHBOARD */}

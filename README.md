@@ -62,3 +62,8 @@ create a `sesssionService` in services folder then call all three apis in `sessi
 ## I have to update get-all-session
 
 To add `current key` in session Schema when I am Implemmenting the session management I have to check the user `Current device` for delete one device so i have get `cookie token` in `get-all-session` controller and check the session.refreshToken and cookie token if same then `current` will be change   `true` and then forntend we get true so it is current device   
+
+
+## Add to Cart flow 
+product cart click on `Add to cart` button where is `addToCart` api hits and add product to logged in user cart in backend and navigate user to `Cart` page where is `getItem` api hits and fetch all product from database and then the data we get from backend save in cart UseState and send to CartItem through prop
+in a CartItem show cart and same data sends to CartSummary it fetch details `quantity price` and show on ui 
