@@ -7,7 +7,7 @@ import { logoutDevice } from "../../services/sessionService.js";
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
-  id: string
+  id?: string
 }
 
 
