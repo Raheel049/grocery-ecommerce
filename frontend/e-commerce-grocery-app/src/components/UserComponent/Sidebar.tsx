@@ -1,14 +1,19 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { LayoutDashboard, ShoppingBag, LogOut, X, User, Settings } from "lucide-react";
+import { logoutDevice } from "../../services/sessionService.js";
 
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  id: string
 }
 
+
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+
+const { id } = useParams<{ id: string }>();
 
   const menuItems = [
     { name: "Overview", path: "/UserDashboard/UserOverview", icon: <LayoutDashboard size={18} /> },
@@ -22,6 +27,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
     
     localStorage.clear();
+    if (id) {
+      logoutDevice(id);
+    }
     window.location.href = "/login";
 
 

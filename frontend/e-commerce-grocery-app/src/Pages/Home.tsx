@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function HomePage(): React.JSX.Element {
 
-    const MotionLink = motion(Link)
+    const MotionLink = motion.create(Link)
   return (
     <div className="min-h-screen bg-[#0B0F19] text-slate-100 font-sans antialiased selection:bg-emerald-500 selection:text-slate-900">
       
