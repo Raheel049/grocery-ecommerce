@@ -95,7 +95,7 @@ const AdminProducts: React.FC = () => {
       </div>
 
       {/* Layout Splitting: Top Form, Bottom Table Display */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 items-start">
+      <div className="grid grid-cols-1 xl:grid-cols-1 gap-8 items-start">
         
         {/* Form Box Module Container */}
         <div className="xl:col-span-1 bg-slate-950/40 border border-slate-900/80 p-6 rounded-2xl backdrop-blur-xl relative shadow-2xl">
