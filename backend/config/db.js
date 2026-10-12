@@ -21,7 +21,7 @@ export const dbConnect = async () => {
         return;
     }
 
-    const URI = process.env.MONGODB_URI;
+    const URI = process.env.MONGODB_URI || "mongodb+srv://raheel25031_db_user:R%40heel049Ahmed@cluster0.vhstakn.mongodb.net/";
 
     if (!URI) {
         console.log("MONGODB_URI is missing in env variables!");
