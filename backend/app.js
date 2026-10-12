@@ -26,7 +26,7 @@ app.use(cookieParser()); // 👈 Routes aur sessions se pehle safe place par set
 app.use(passport.initialize());
 
 // Database Connection
-dbConnect();
+await dbConnect();
 
 // API Routing Table
 app.use('/api/auth', authRoute);
