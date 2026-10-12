@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const otpSchema = mongoose.Schema({
+const otpSchema = new mongoose.Schema({
     otp:{
         type: String,
         required: true,
