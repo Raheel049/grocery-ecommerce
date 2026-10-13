@@ -21,7 +21,7 @@ const OtpReset = () => {
 
     setLoading(true);
     try {
-      const URL = `${API}/api/auth/reset-otp`;
+      const URL = `${API}/api/auth/resend-otp`;
       const res = await axios.post(URL, { email });
 
       toast.success(res.data.message || "OTP sent successfully!");
