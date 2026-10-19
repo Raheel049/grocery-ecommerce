@@ -1,7 +1,8 @@
 import express from 'express'
-import { loginHandler, logoutHandler, forgetPassword, changePassword, refreshTokenHandler, signUpHandler, resendOtpHandler, verificationHandler, } from '../controllers/auth.js';
+import { loginHandler, logoutHandler, forgetPassword, changePassword, refreshTokenHandler, signUpHandler, resendOtpHandler, verificationHandler, getMe, } from '../controllers/auth.js';
 import passport from '../config/passport.js'
 import { googleLogin, githubLogin } from "../controllers/socialAuth.js";
+import { authMiddleware } from '../middleware/middleware.js';
 
 const authRoute = express.Router();
 
@@ -59,6 +60,8 @@ authRoute.get(
   }),
   githubLogin
 );
+
+authRoute.get("/get-me", authMiddleware ,getMe)
 
 // authRoute.get("/checkRequest", checkReq)
 

@@ -556,3 +556,28 @@ export const changePassword = async (req, res) => {
 //   console.log("userAgent",req.headers['user-agent']);
 //   res.send("Hit success")
 // }
+
+export const getMe = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.user.id).select("-password -otp")
+    if(!user){
+      return res.status(401).json({
+        status: false,
+        message: "Unauthorized"
+      });
+    }
+
+    res.status(200).json({
+      message: "user found",
+      data: user,
+      status: true
+    })
+
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || "Internal server error",
+      status: false,
+      data: null,
+    });
+  }
+}
