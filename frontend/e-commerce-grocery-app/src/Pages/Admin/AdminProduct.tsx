@@ -57,7 +57,7 @@ const AdminProducts: React.FC = () => {
         imageUrl
       };
 
-      const response = await api.post("/product/add", payload);
+      const response = await api.post("/api/product/add", payload);
       toast.success(response.data.message || "Product injected into database!");
       
       // Reset Form fields
