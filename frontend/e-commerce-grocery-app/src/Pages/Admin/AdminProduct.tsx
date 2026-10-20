@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { PlusCircle, ShoppingBag, DollarSign, Layers, Package, Image, Loader2, ListPlus } from "lucide-react";
 import { toast } from "react-hot-toast";
 import privateAPI from "../../api/axiosInstance.js"; // Aapka custom private cookie axios instance
-
+import api from "../../api/client.js";
 interface Product {
   _id: string;
   name: string;
@@ -57,7 +57,7 @@ const AdminProducts: React.FC = () => {
         imageUrl
       };
 
-      const response = await privateAPI.post("/api/product/add", payload);
+      const response = await api.post("/product/add", payload);
       toast.success(response.data.message || "Product injected into database!");
       
       // Reset Form fields
