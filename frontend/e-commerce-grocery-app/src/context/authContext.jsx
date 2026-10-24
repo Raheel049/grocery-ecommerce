@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import api from "../api/client";
 import { AuthContext } from "./useAuth";
+import axiosInstance from "../api/axiosInstance";
+
+const API = import.meta.env.VITE_API_URL
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  
 
   useEffect(() => {
     const checkAuthState = async () => {
       try {
-        const response = await api.get("/auth/get-me");
+        const response = await axiosInstance.get(`${API}/api/auth/get-me`);
         if (response.data?.status && response.data?.user) {
           setUser(response.data.data);
         } else {
