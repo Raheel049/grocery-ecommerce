@@ -59,6 +59,7 @@ const App = () => {
           {/* ADMIN DASHBOARD */}
           <Route path="/AdminDashboard" element={<AdminDashboard />}>
             <Route index element={<AdminProducts />} />
+            <Route path="Overview" element={<AdminProducts />} />
           </Route>
 
         </Route>
