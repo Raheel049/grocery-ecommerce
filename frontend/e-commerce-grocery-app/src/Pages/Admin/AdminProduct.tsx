@@ -3,6 +3,9 @@ import { PlusCircle, ShoppingBag, DollarSign, Layers, Package, Image, Loader2, L
 import { toast } from "react-hot-toast";
 import axiosInstance from "../../api/axiosInstance.js"; // Aapka custom private cookie axios instance
 // import api from "../../api/client.js";
+
+const API: string = (import.meta.env.VITE_API_URL as string) || "";
+
 interface Product {
   _id: string;
   name: string;
@@ -57,7 +60,7 @@ const AdminProducts: React.FC = () => {
         imageUrl
       };
 
-      const response = await axiosInstance.post("/api/product/add", payload);
+      const response = await axiosInstance.post(`${API}/api/product/add`, payload);
       toast.success(response.data.message || "Product injected into database!");
       
       // Reset Form fields
