@@ -1,5 +1,5 @@
-import { createContext, useContext,ReactNode } from "react";
-
+import { createContext, useContext} from "react";
+import type { ReactNode } from "react";
 // User ka interface (Aap apne backend user object ke mutabiq keys badal sakte hain)
 export interface UserType {
   id: string;
