@@ -1,7 +1,7 @@
 import React, { useEffect, useState, } from "react";
-import type { UserType } from "./useAuth.js";
-import { AuthContext } from "./useAuth.js";
-import axiosInstance from "../api/axiosInstance.js";
+import type { UserType } from "./useAuth.tsx";
+import { AuthContext } from "./useAuth.tsx";
+import axiosInstance from "../api/axiosInstance.tsx";
 import type { ReactNode } from "react";
 
 const API = import.meta.env.VITE_API_URL;
