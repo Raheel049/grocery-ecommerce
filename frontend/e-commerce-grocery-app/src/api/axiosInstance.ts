@@ -38,23 +38,23 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        // Apne customized axiosInstance se hi refresh call karein taaki base URL aur options standard rahein
         await axiosInstance.post("/api/auth/refresh-token", {});
-
-        // Refresh kamyab hone ke baad purani request ko dobara run karein
         return axiosInstance(originalRequest);
       } catch (refreshError) {
-        // Agar refresh token bhi expire/invalid ho chuka hai to user ko logout karein
         console.error("Refresh token failed:", refreshError);
         
-        // redirect to login safely
         if (typeof window !== "undefined") {
           localStorage.clear();
-          window.location.href = "/login"; 
+          
+          // Loop se bachne ke liye: Agar user pehle se login page par nahi hai, sirf tabhi redirect karein
+          if (!window.location.pathname.includes("/login")) {
+            window.location.href = "/login"; 
+          }
         }
         
-        return Promise.reject(refreshError); // Console.log ki jagah reject lazmi hai
+        return Promise.reject(refreshError);
       }
+
     }
 
     return Promise.reject(error);
